@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>통근버스 노선 및 카카오내비 안내</title>
+  <title>논현구월노선</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -26,6 +26,10 @@
       align-items: center;
       gap: 8px;
       margin-bottom: 8px;
+    }
+    .route-title {
+      font-size: 18px;
+      font-weight: 800;
     }
     .gps-badge {
       font-size: 12px;
@@ -158,10 +162,10 @@
 <body>
   <div class="header">
     <div class="header-top">
-      <div style="font-size: 15px; font-weight: 800;">통근버스 정류장 안내 (총 19곳)</div>
+      <div class="route-title">논현구월노선</div>
       <div id="gpsStatus" class="gps-badge warn">GPS 대기 중</div>
     </div>
-    <div id="gpsCoord" style="font-size: 12px; color: #9ca3af;">위치 권한을 허용하면 좌표 입력된 정류장까지 거리를 계산합니다.</div>
+    <div id="gpsCoord" style="font-size: 12px; color: #9ca3af;">총 19곳 · 위치 권한을 허용하면 좌표 입력된 정류장까지 거리를 계산합니다.</div>
 
     <div class="next-box">
       <div class="next-label">다음 강조 정류장</div>
@@ -199,7 +203,7 @@
       { name: "간석역", address: "인천 미추홀구 주안동 883", time: "", lat: null, lng: null },
       { name: "주안남부역", address: "인천광역시 미추홀구 주안로 89", time: "", lat: null, lng: null },
       { name: "동원아파트", address: "인천 미추홀구 도화동 566-2", time: "", lat: null, lng: null },
-      { name: "현대제철입구", address: "인천광역시 제물포구 중봉대로 63", time: "", lat: null, lng: null }
+      { name: "현대제철", address: "인천광역시 제물포구 중봉대로 63", time: "", lat: null, lng: null }
     ];
 
     const ARRIVAL_RADIUS_METERS = 80;
@@ -321,7 +325,7 @@
           const { latitude, longitude } = pos.coords;
           statusEl.textContent = "GPS 연결됨";
           statusEl.className = "gps-badge";
-          coordEl.textContent = `현재 좌표: ${latitude.toFixed(5)}, ${longitude.toFixed(5)} (좌표 등록 정류장 반경 ${ARRIVAL_RADIUS_METERS}m 진입 시 자동 강조)`;
+          coordEl.textContent = `총 19곳 · 현재 좌표: ${latitude.toFixed(5)}, ${longitude.toFixed(5)} (반경 ${ARRIVAL_RADIUS_METERS}m 진입 시 자동 강조)`;
 
           STOPS.forEach((stop, idx) => {
             if (typeof stop.lat === "number" && typeof stop.lng === "number") {
