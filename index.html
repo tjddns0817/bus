@@ -224,23 +224,29 @@
     }
 
     function openKakaoNavi(stop) {
+      const label = stop.name || stop.address;
       const queryText = stop.address || stop.name;
-      const encodedQuery = encodeURIComponent(queryText);
 
       if (typeof stop.lat === "number" && typeof stop.lng === "number") {
-        const label = stop.name || stop.address;
         const appUrl = `kakaonavi://navigate?name=${encodeURIComponent(label)}&x=${stop.lng}&y=${stop.lat}&coordType=wgs84`;
         const webUrl = `https://map.kakao.com/link/to/${encodeURIComponent(label)},${stop.lat},${stop.lng}`;
         const start = Date.now();
         window.location.href = appUrl;
         setTimeout(() => {
-          if (Date.now() - start < 1800 && !document.hidden) {
+          if (Date.now() - start < 1900 && !document.hidden) {
             window.open(webUrl, "_blank", "noopener");
           }
-        }, 1000);
+        }, 1200);
       } else {
-        const searchWebUrl = `https://map.kakao.com/link/search/${encodedQuery}`;
-        window.open(searchWebUrl, "_blank", "noopener");
+        const appSearchUrl = `kakaonavi://search?query=${encodeURIComponent(queryText)}`;
+        const webSearchUrl = `https://map.kakao.com/link/search/${encodeURIComponent(queryText)}`;
+        const start = Date.now();
+        window.location.href = appSearchUrl;
+        setTimeout(() => {
+          if (Date.now() - start < 1900 && !document.hidden) {
+            window.open(webSearchUrl, "_blank", "noopener");
+          }
+        }, 1200);
       }
     }
 
